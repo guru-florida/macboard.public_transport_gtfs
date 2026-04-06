@@ -1,0 +1,41 @@
+# Node
+frontend/node_modules
+frontend/build
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# Python
+**/__pycache__
+**/*.pyc
+**/*.pyo
+backend/.venv
+backend/venv
+backend/*.egg-info
+backend/.pytest_cache
+backend/dist
+# Python packaging
+*.egg-info/
+.eggs/
+dist/
+build/
+
+
+# Data
+*.db
+*.sqlite
+*.sqlite3
+/data
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Editor & OS
+.idea
+.DS_Store
+*.swp
+*.swo
+Thumbs.db
