@@ -3,7 +3,7 @@ FROM python:3.12-slim
 WORKDIR /app
 
 # Install macboard_adapter SDK first (editable or from wheel)
-COPY --from=macboard_adapter_src /macboard_adapter /macboard_adapter
+COPY --from=macboard_adapter_src . /macboard_adapter
 RUN pip install --no-cache-dir /macboard_adapter
 
 # Install adapter dependencies
