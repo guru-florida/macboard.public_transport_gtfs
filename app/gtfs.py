@@ -378,15 +378,19 @@ class GtfsIndex:
         if stop_id not in self._stop_departures:
             return []
 
-        reference = at or datetime.now()
-        midnight = datetime.combine(reference.date(), datetime.min.time())
+        # Use timezone-aware datetime so departure_time strings include the UTC
+        # offset.  parseISO on the frontend then correctly converts them to UTC
+        # regardless of the device's local timezone.
+        reference = (at or datetime.now()).astimezone()
 
         # Each candidate: (departure_datetime, route_id, route_short_name, route_long_name, headsign)
         candidates: list[tuple[datetime, str, str, str, str]] = []
 
         for service_day_offset in (0, -1):
             service_date = reference.date() + timedelta(days=service_day_offset)
-            service_midnight = datetime.combine(service_date, datetime.min.time())
+            service_midnight = datetime.combine(
+                service_date, datetime.min.time()
+            ).astimezone(reference.tzinfo)
 
             svc_ids_checked: set[str] = set()
 
